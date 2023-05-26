@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from 'react'
 import { ITraining } from '../App';
 
 const Form: React.FC<FormProps> = ({ addTraining }) => {
-  const [form, setForm] = useState<ITraining>();
+  const [form, setForm] = useState<IForm | ITraining>();
   const handlerChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const value = event.target.name === 'date'
       ? new Date(event.target.value).getTime()
@@ -12,7 +12,7 @@ const Form: React.FC<FormProps> = ({ addTraining }) => {
 
   const handlerSubmit = (event: ChangeEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    form && addTraining(form)
+    addTraining(form)
     event.target.reset();
   }
 
@@ -54,4 +54,9 @@ export default Form
 
 interface FormProps {
   addTraining: (training: ITraining) => void
+}
+
+interface IForm {
+  distance?: string,
+  date?: string
 }

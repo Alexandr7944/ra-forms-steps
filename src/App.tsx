@@ -56,6 +56,6 @@ function App() {
 export default App
 
 export interface ITraining {
-  distance?: string,
-  date?: string
+  distance: string,
+  date: string
 }
