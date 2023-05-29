@@ -1,19 +1,20 @@
 import React, { ChangeEvent, useState } from 'react'
-import { ITraining } from '../App';
+import { FormProps } from '../interface/FormProps';
+import { ITraining } from '../interface/ITraining';
 
 const Form: React.FC<FormProps> = ({ addTraining }) => {
-  const [form, setForm] = useState<IForm | ITraining>();
+  const [form, setForm] = useState<ITraining>({date: '', distance: 0});
   const handlerChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const value = event.target.name === 'date'
       ? new Date(event.target.value).getTime()
-      : event.target.value
-    setForm({...form, [event.target.name]: value});
+      : +event.target.value
+    setForm({...form, [event.target.name]: value});    
   }
 
   const handlerSubmit = (event: ChangeEvent<HTMLFormElement>): void => {
     event.preventDefault();
     addTraining(form)
-    event.target.reset();
+    event.target.reset()
   }
 
   return (
@@ -36,7 +37,7 @@ const Form: React.FC<FormProps> = ({ addTraining }) => {
         <input
           className='form-input'
           type="number"
-          name="distance" 
+          name="distance"
           onChange={handlerChange}
           required
         />
@@ -51,12 +52,3 @@ const Form: React.FC<FormProps> = ({ addTraining }) => {
 }
 
 export default Form
-
-interface FormProps {
-  addTraining: (training: ITraining) => void
-}
-
-interface IForm {
-  distance?: string,
-  date?: string
-}

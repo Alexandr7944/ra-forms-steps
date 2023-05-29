@@ -1,4 +1,4 @@
-import { ITraining } from "../App"
+import { TrainingProps } from "../interface/TrainingProps";
 
 const Training: React.FC<TrainingProps> = ({ training, remuveTraining }) => {
   const date = training.date && new Date(training.date).toLocaleDateString() || '';
@@ -8,9 +8,7 @@ const Training: React.FC<TrainingProps> = ({ training, remuveTraining }) => {
       <div>{date}</div>
       <div>{training.distance}</div>
       <div>
-        <button 
-          className="content-btn"
-        >&#9998;</button>
+        <button className="content-btn">&#9998;</button>
         <button 
           className="content-btn"
           onClick={() => training.date && remuveTraining(training.date)}
@@ -21,8 +19,3 @@ const Training: React.FC<TrainingProps> = ({ training, remuveTraining }) => {
 }
 
 export default Training
-
-type TrainingProps = {
-  training: ITraining;
-  remuveTraining: (date: string) => void
-}
